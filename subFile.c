@@ -109,25 +109,26 @@ LINE_NODE *subReadFile(int fd)
 	return line_start;
 }
 
-int subDisplay(LINE_NODE *first_line, WINDOW *ed_win )
+CURSOR_INFO subDisplay(LINE_NODE *first_line, WINDOW *ed_win )
 {
 	/*
 		------
 	*/
 	LINE_NODE *currentLine = NULL;
 	CHAR_NODE *currentChar = NULL;
+	CURSOR_INFO curs_info;
 	int disp = -1;
 
 	disp = display_init(first_line, ed_win);
 	if(disp == 0)
 	{
-		move_after_display_init(first_line, ed_win );
+		curs_info = move_after_display_init(first_line, ed_win );
 	}
 	else
 	{
 	}
-	wgetch(ed_win );
-	return 0;
+	//wgetch(ed_win );
+	return curs_info;;
 }
 
 /* Initial (first) display */
@@ -166,8 +167,9 @@ int display_init(LINE_NODE *first_line, WINDOW *ed_win)
 	return 0;
 }
 
-void move_after_display_init(LINE_NODE *first_line, WINDOW *ed_win)
+CURSOR_INFO move_after_display_init(LINE_NODE *first_line, WINDOW *ed_win)
 {
+	CURSOR_INFO curs_info;
 	int y, x;
 	int y_count = 0;
 	int y_count_inc = 0;
@@ -175,7 +177,10 @@ void move_after_display_init(LINE_NODE *first_line, WINDOW *ed_win)
 	CHAR_NODE *currentChar = currentLine->c;
 	wmove(ed_win, 0, 0);
 	getyx(ed_win, y, x);
-	while(currentChar->ci == ' ' || currentChar->ci == '\t')
+	wrefresh(ed_win);
+	curs_info.cursor_line = first_line;
+	curs_info.cursor_char = currentChar;
+	while(currentChar->ci == ' ' || currentChar->ci == '\t' || currentChar->ci == '\n')
 	{
 		if(currentChar->ci == ' ')
 		{
@@ -190,7 +195,18 @@ void move_after_display_init(LINE_NODE *first_line, WINDOW *ed_win)
 			x=x+y_count_inc;
 			wmove(ed_win, y, x);
 		}
+		else if(currentChar->ci == '\n')
+		{
+			curs_info.cursor_line = first_line;
+			curs_info.cursor_char = first_line->c;
+			wmove(ed_win, 0, 0);
+			wrefresh(ed_win);
+			return curs_info;
+		}
 		currentChar = currentChar->nextc;
+		curs_info.cursor_line = first_line;
+		curs_info.cursor_char = currentChar;
 	}
+	return curs_info;
 }
 //

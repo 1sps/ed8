@@ -44,13 +44,20 @@
 		struct char_node *nextc;
 		struct char_node *previousc;
 	}CHAR_NODE;
+	
+	/*Struct LINE_NODE and CHAR_NODE*/
+	typedef struct cursor_info
+	{
+		LINE_NODE *cursor_line;
+		CHAR_NODE *cursor_char;
+	}CURSOR_INFO;
 
 	/* Function prototype declarations*/
-	void modeNormal(WINDOW *);
+	int modeNormal(CURSOR_INFO, WINDOW *);
 	CHAR_NODE *create_char_node(void);
 	LINE_NODE *create_line_node(void);
 	LINE_NODE *subReadFile(int);
-	int subDisplay(LINE_NODE *, WINDOW *);
+	CURSOR_INFO subDisplay(LINE_NODE *, WINDOW *);
 	int display_init(LINE_NODE *, WINDOW *);
 	LINE_NODE *next_line(LINE_NODE *);
 	LINE_NODE *previous_line(LINE_NODE *);
@@ -62,6 +69,8 @@
 	void subInitWindow(WINDOW *);
 	void subOnWindow(WINDOW *);
 	void subOffWindow(WINDOW *);
-	void move_after_display_init(LINE_NODE *, WINDOW *);
+	CURSOR_INFO move_after_display_init(LINE_NODE *, WINDOW *);
+	CURSOR_INFO modeInsert(CURSOR_INFO );
+	void modeCommand();
 
 #endif
