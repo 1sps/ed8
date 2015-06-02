@@ -64,7 +64,7 @@
 	LINE_NODE *next_page(LINE_NODE *);
 	char *subGetFileName(WINDOW *);
 	int subOpenFile(char *, WINDOW *);
-	int ed8(void);
+	int ed8(char *);
 	int subFreeMemory(char *);
 	void subInitWindow(WINDOW *);
 	void subOnWindow(WINDOW *);

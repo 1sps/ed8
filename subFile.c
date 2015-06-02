@@ -109,6 +109,29 @@ LINE_NODE *subReadFile(int fd)
 	return line_start;
 }
 
+/* Function to create a new LINE_NODE */
+/* Returns the pointer to newly created LINE_NODE */
+LINE_NODE *create_line_node(void)
+{
+	LINE_NODE *node_ptr = malloc(sizeof(LINE_NODE));
+	node_ptr->next = NULL;
+	node_ptr->previous = NULL;
+	int line_number = -1;
+	node_ptr->has_data = FALSE;
+	node_ptr->num_bytes = 0;
+	return node_ptr;
+}
+
+/* Function to create a new CHAR_NODE */
+/* Returns the pointer to newly created CHAR_NODE*/
+CHAR_NODE *create_char_node(void)
+{
+	CHAR_NODE *char_node_ptr = malloc(sizeof(CHAR_NODE));
+	char_node_ptr->nextc = NULL;
+	char_node_ptr->previousc = NULL;
+	return char_node_ptr;
+}
+
 void subDisplay(LINE_NODE *first_line, WINDOW *ed_win )
 {
 	/*

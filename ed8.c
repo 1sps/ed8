@@ -17,26 +17,26 @@ CURSOR_INFO curs_info;
 int main(int argc, char *argv[])
 {
 	/* If user invokes the program incorrectly */
-	if(argc != 1)
+	if(argc != 2)
 	{
-		printf("ed8 :: Don't pass command line arguments.");
+		//printf("ed8 :: Don't pass command line arguments.");
 		printf(" Please be careful and retry.\n");
 		exit(1);
 	}
 
 	/*Call ed8()*/
-	ed8();
+	ed8(argv[1]);
 	/* main() ends */
 	return 0;
 }
 
 /*Editor*/
-int ed8(void)
+int ed8(char *fileName)
 {
 	/*Local Variables*/
+	int changeTo = 0;
 	int fd;
 	int ymax, xmax;
-	char *fileName = NULL;
 	LINE_NODE *firstLine = NULL;
 
 	/*Start curses*/
@@ -51,9 +51,6 @@ int ed8(void)
 	WINDOW *ed_win = newwin(ymax-2, xmax-2, 1 ,1);
 	wmove(ed_win, 0 ,0);
 	  
-	/*Get filename*/
-	fileName = subGetFileName(ed_win);
-
 	/*Open file*/
 	fd = subOpenFile(fileName, ed_win);
 
@@ -64,10 +61,20 @@ int ed8(void)
 	/*Display*/
 	subDisplay(firstLine, ed_win);
 
-	modeNormal(ed_win);
+	while(1)
+	{
+		int changeTo = modeNormal(ed_win);
+		if(changeTo == 2)
+		{
+			modeInsert();
+			break;
+		}
+		else if(changeTo == 3)
+			break;//modeCommand();
+	}
 
 	/*Free*/
-	subFreeMemory(fileName);
+	//subFreeMemory(fileName);
 
 	/*Delete windows, end curses*/
 	delwin(ed_win);

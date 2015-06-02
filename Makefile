@@ -5,7 +5,7 @@
 
 CC = gcc
 
-OBJECTS = ed8.o modeNormal.o subNodes.o subFile.o modeInsert.o modeCommand.o
+OBJECTS = ed8.o modeNormal.o subFile.o modeInsert.o modeCommand.o
 
 ed8: $(OBJECTS)
 	$(CC) $(OBJECTS) -o ed8 -lncurses
@@ -13,8 +13,6 @@ ed8: $(OBJECTS)
 ed8.o: header8.h
 
 modeNormal.o: header8.h
-
-subNodes.o: header8.h
 
 subFile.o: header8.h
 

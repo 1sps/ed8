@@ -31,11 +31,11 @@ int modeNormal(WINDOW *ed_win)
 			}*/
 			if(ch == 'i')
 			{
-				return 1;
+				return 2;
 			}
 			else if(ch == ':') 
 			{
-				return 2;
+				return 3;
 			}
 		}
 	}
