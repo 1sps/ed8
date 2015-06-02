@@ -22,6 +22,7 @@ modeCommand: header8.h
 
 .PHONY: clean
 clean:
-	rm ed8 $(OBJECTS)
+	-rm $(OBJECTS)
+	rm ed8
 
 # End of Makefile
