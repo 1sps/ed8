@@ -10,7 +10,7 @@
 #include"header8.h"
 
 /* Function definition of editor() */
-int modeNormal(CURSOR_INFO curs_info, WINDOW *ed_win)
+int modeNormal(WINDOW *ed_win)
 {
 	/*Function local variables*/
 	LINE_NODE *line_start = NULL;

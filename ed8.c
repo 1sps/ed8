@@ -10,6 +10,8 @@
 #include<stdlib.h>
 #include"header8.h"
 
+/*Keep track which char is crusor on*/
+CURSOR_INFO curs_info;
 
 /*Main begins*/
 int main(int argc, char *argv[])
@@ -34,7 +36,6 @@ int ed8(void)
 	/*Local Variables*/
 	int fd;
 	int ymax, xmax;
-	CURSOR_INFO curs_info;
 	char *fileName = NULL;
 	LINE_NODE *firstLine = NULL;
 
@@ -61,9 +62,9 @@ int ed8(void)
 	firstLine = subReadFile(fd);
 
 	/*Display*/
-	curs_info = subDisplay(firstLine, ed_win);
+	subDisplay(firstLine, ed_win);
 
-	modeNormal(curs_info, ed_win);
+	modeNormal(ed_win);
 
 	/*Free*/
 	subFreeMemory(fileName);

@@ -9,7 +9,7 @@
 #include<ncurses.h>
 #include"header8.h"
 
-void modeCommand()
+void modeCommand(void)
 {
 
 }

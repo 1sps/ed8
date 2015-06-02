@@ -53,11 +53,11 @@
 	}CURSOR_INFO;
 
 	/* Function prototype declarations*/
-	int modeNormal(CURSOR_INFO, WINDOW *);
+	int modeNormal(WINDOW *);
 	CHAR_NODE *create_char_node(void);
 	LINE_NODE *create_line_node(void);
 	LINE_NODE *subReadFile(int);
-	CURSOR_INFO subDisplay(LINE_NODE *, WINDOW *);
+	void subDisplay(LINE_NODE *, WINDOW *);
 	int display_init(LINE_NODE *, WINDOW *);
 	LINE_NODE *next_line(LINE_NODE *);
 	LINE_NODE *previous_line(LINE_NODE *);
@@ -69,8 +69,10 @@
 	void subInitWindow(WINDOW *);
 	void subOnWindow(WINDOW *);
 	void subOffWindow(WINDOW *);
-	CURSOR_INFO move_after_display_init(LINE_NODE *, WINDOW *);
-	CURSOR_INFO modeInsert(CURSOR_INFO );
-	void modeCommand();
+	void move_after_display_init(LINE_NODE *, WINDOW *);
+	void modeInsert(void);
+	void modeCommand(void);
+	
+	extern CURSOR_INFO curs_info;
 
 #endif

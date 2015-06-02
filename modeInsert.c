@@ -9,7 +9,7 @@
 #include<ncurses.h>
 #include"header8.h"
 
-CURSOR_INFO modeInsert(CURSOR_INFO cursInfo)
+void modeInsert(void)
 {
 
 }
