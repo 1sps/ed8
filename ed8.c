@@ -61,16 +61,22 @@ int ed8(char *fileName)
 	/*Display*/
 	subDisplay(firstLine, ed_win);
 
+	/*--------------------*/
+	/*--------------------*/
 	while(1)
 	{
 		int changeTo = modeNormal(ed_win);
 		if(changeTo == 2)
 		{
-			modeInsert();
-			break;
+			modeInsert(ed_win);
+			//break;
 		}
 		else if(changeTo == 3)
-			break;//modeCommand();
+			changeTo = modeCommand(ed_win);//modeCommand();
+		if (changeTo == 4)
+		{
+			break;
+		}
 	}
 
 	/*Free*/

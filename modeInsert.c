@@ -9,7 +9,7 @@
 #include<ncurses.h>
 #include"header8.h"
 
-void modeInsert(void)
+int modeInsert(WINDOW *ed_win)
 {
-
+	return 0;
 }
