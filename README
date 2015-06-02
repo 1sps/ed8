@@ -1,0 +1,15 @@
+1. Ascii text display
+
+2. Depends on ncurses
+
+3. To install:
+
+	$ make
+
+4. To run:
+
+	$ ./ed8
+
+4. To uninstall
+
+	$ make clean
