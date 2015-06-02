@@ -10,6 +10,6 @@
 
 	$ ./ed8
 
-4. To uninstall
+5. To uninstall
 
 	$ make clean
