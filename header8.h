@@ -83,7 +83,15 @@
 	MODE modeInsert(WINDOW *);
 	MODE modeCommand(WINDOW *);
 	void navigate(char, WINDOW *);
+	void navigateH(WINDOW *);
+	void navigateJ(WINDOW *);
+	void navigateK(WINDOW *);
+	void navigateL(WINDOW *);
 	
+	/*Defined in ed8.c*/
 	extern CURSOR_INFO curs_info;
+	extern int ycount;
+	extern int xcount;
+	extern LINE_NODE *num1Line;
 
 #endif

@@ -85,6 +85,7 @@ LINE_NODE *subReadFile(int fd)
 					char_current->ci = buffer1[i];
 					char_temp = create_char_node();
 					char_current->nextc = char_temp;
+					char_temp->previousc = char_current;
 					char_current = char_temp;
 				}
 				else if(buffer1[i] == '\n')
@@ -148,6 +149,7 @@ void subDisplay(LINE_NODE *first_line, WINDOW *ed_win )
 	}
 	else
 	{
+		move_after_display_init(first_line, ed_win );
 	}
 	//wgetch(ed_win );
 }
@@ -191,8 +193,8 @@ int display_init(LINE_NODE *first_line, WINDOW *ed_win)
 void move_after_display_init(LINE_NODE *first_line, WINDOW *ed_win)
 {
 	int y, x;
-	int y_count = 0;
-	int y_count_inc = 0;
+	//int x_count = 0;
+	int x_count_inc = 0;
 	LINE_NODE *currentLine = first_line;
 	CHAR_NODE *currentChar = currentLine->c;
 	wmove(ed_win, 0, 0);
@@ -200,19 +202,22 @@ void move_after_display_init(LINE_NODE *first_line, WINDOW *ed_win)
 	wrefresh(ed_win);
 	curs_info.cursor_line = first_line;
 	curs_info.cursor_char = currentChar;
+	xcount = 0;
 	while(currentChar->ci == ' ' || currentChar->ci == '\t' || currentChar->ci == '\n')
 	{
 		if(currentChar->ci == ' ')
 		{
-			y_count++;
+			
+			getyx(ed_win, y, x);
+			xcount++;
 			x=x+1;
 			wmove(ed_win, y, x);
 		}
 		else if(currentChar->ci == '\t')
 		{
-			y_count_inc = TAB_LENGTH - (y_count%TAB_LENGTH);
-			y_count=y_count+y_count_inc;
-			x=x+y_count_inc;
+			x_count_inc = TAB_LENGTH - (xcount%TAB_LENGTH);
+			xcount=xcount+x_count_inc;
+			x=x+x_count_inc;
 			wmove(ed_win, y, x);
 		}
 		else if(currentChar->ci == '\n')
@@ -221,10 +226,12 @@ void move_after_display_init(LINE_NODE *first_line, WINDOW *ed_win)
 			curs_info.cursor_char = first_line->c;
 			wmove(ed_win, 0, 0);
 			wrefresh(ed_win);
+			xcount = 0;
+			break;
 		}
 		currentChar = currentChar->nextc;
-		curs_info.cursor_line = first_line;
-		curs_info.cursor_char = currentChar;
 	}
+	curs_info.cursor_line = first_line;
+	curs_info.cursor_char = currentChar;
 }
 //
