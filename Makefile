@@ -5,7 +5,7 @@
 
 CC = gcc
 
-OBJECTS = ed8.o modeNormal.o subFile.o modeInsert.o modeCommand.o
+OBJECTS = ed8.o modeNormal.o subFile.o modeInsert.o modeCommand.o navigate.o
 
 ed8: $(OBJECTS)
 	$(CC) $(OBJECTS) -o ed8 -lncurses
@@ -16,9 +16,11 @@ modeNormal.o: header8.h
 
 subFile.o: header8.h
 
-modeInsert: header8.h
+modeInsert.o: header8.h
 
-modeCommand: header8.h
+modeCommand.o: header8.h
+
+navigate.o: header8.h
 
 .PHONY: clean
 clean:

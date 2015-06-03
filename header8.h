@@ -82,6 +82,7 @@
 	void move_after_display_init(LINE_NODE *, WINDOW *);
 	MODE modeInsert(WINDOW *);
 	MODE modeCommand(WINDOW *);
+	void navigate(char, WINDOW *);
 	
 	extern CURSOR_INFO curs_info;
 

@@ -26,10 +26,10 @@ MODE modeNormal(WINDOW *ed_win)
 		while(1)
 		{
 			ch = wgetch(ed_win);
-			/*if(ch == 'j')
+			if(ch == 'h' || ch == 'j' || ch == 'k' || ch == 'l')
 			{
-				jAtNormalMode();
-			}*/
+				navigate(ch, ed_win);
+			}
 			if(ch == 'i')
 			{
 
