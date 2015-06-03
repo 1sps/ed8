@@ -9,8 +9,9 @@
 #include<ncurses.h>
 #include"header8.h"
 
-int modeCommand(WINDOW *ed_win)
+MODE modeCommand(WINDOW *ed_win)
 {
+	MODE changeModeTo = PHONY;
 	char choice[25];
 	int y, x, ymax, xmax;
 	getmaxyx(ed_win, ymax, xmax);
@@ -26,7 +27,8 @@ int modeCommand(WINDOW *ed_win)
 	wrefresh(ed_win);
 	if(strcmp(choice, "q") == 0)
 	{
-		return 4;
+		changeModeTo = EXIT;
+		return changeModeTo;
 	}
-	return 0;
+	return changeModeTo;
 }

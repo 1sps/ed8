@@ -10,11 +10,12 @@
 #include"header8.h"
 
 /* Function definition of editor() */
-int modeNormal(WINDOW *ed_win)
+MODE modeNormal(WINDOW *ed_win)
 {
 	/*Function local variables*/
 	LINE_NODE *line_start = NULL;
 	LINE_NODE *current = NULL;
+	MODE changeModeTo = PHONY;
 	char ch = 0;
 
 	{
@@ -31,13 +32,16 @@ int modeNormal(WINDOW *ed_win)
 			}*/
 			if(ch == 'i')
 			{
-				return 2;
+
+				changeModeTo = INSERT;
+				return changeModeTo;
 			}
 			else if(ch == ':') 
 			{
-				return 3;
+				changeModeTo = COMMAND;
+				return changeModeTo;
 			}
 		}
 	}
-	return 0;
+	return changeModeTo;
 }

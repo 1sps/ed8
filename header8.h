@@ -52,8 +52,18 @@
 		CHAR_NODE *cursor_char;
 	}CURSOR_INFO;
 
+	/*Enumeration of modes*/
+	typedef enum mode 
+	{
+		NORMAL,
+		INSERT,
+		COMMAND,
+		EXIT,
+		PHONY
+	}MODE;
+
 	/* Function prototype declarations*/
-	int modeNormal(WINDOW *);
+	MODE  modeNormal(WINDOW *);
 	CHAR_NODE *create_char_node(void);
 	LINE_NODE *create_line_node(void);
 	LINE_NODE *subReadFile(int);
@@ -70,8 +80,8 @@
 	void subOnWindow(WINDOW *);
 	void subOffWindow(WINDOW *);
 	void move_after_display_init(LINE_NODE *, WINDOW *);
-	int modeInsert(WINDOW *);
-	int modeCommand(WINDOW *);
+	MODE modeInsert(WINDOW *);
+	MODE modeCommand(WINDOW *);
 	
 	extern CURSOR_INFO curs_info;
 

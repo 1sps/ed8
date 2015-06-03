@@ -9,7 +9,8 @@
 #include<ncurses.h>
 #include"header8.h"
 
-int modeInsert(WINDOW *ed_win)
+MODE modeInsert(WINDOW *ed_win)
 {
-	return 0;
+	MODE changeModeTo = PHONY;
+	return changeModeTo;
 }

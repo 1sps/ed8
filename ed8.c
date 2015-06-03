@@ -65,15 +65,15 @@ int ed8(char *fileName)
 	/*--------------------*/
 	while(1)
 	{
-		int changeTo = modeNormal(ed_win);
-		if(changeTo == 2)
+		MODE changeModeTo = modeNormal(ed_win);
+		if(changeModeTo == INSERT)
 		{
 			modeInsert(ed_win);
 			//break;
 		}
-		else if(changeTo == 3)
-			changeTo = modeCommand(ed_win);//modeCommand();
-		if (changeTo == 4)
+		else if(changeModeTo == COMMAND)
+			changeModeTo = modeCommand(ed_win);//modeCommand();
+		if (changeModeTo == EXIT)
 		{
 			break;
 		}
