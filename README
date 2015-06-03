@@ -1,17 +1,33 @@
-1. Ascii text display
+# 06/02/2015
+# Written by: SPS
 
-2. Depends on ncurses
+# This repository has the source code of a program to display ascii text file.
+# This C program is written for a GNU/Linux system.
+# Dependency : "ncurses" C library
 
-3. To install:
+Steps to download the source code and compile it
+------------------------------------------------
+1. Make a local copy of the source code:
 
+	$ cd ~
+	$ git clone https://github.com/1sps/ed8.git
+
+2. Compile the source code:
+
+	$ cd ~/ed8
 	$ make
 
-4. To run:
+Steps to run the program
+------------------------
+1. To run:
 
+	$ cd ~/ed8
 	$ ./ed8
 
-5. To uninstall
+Steps to uninstall the program 
+------------------------------
+1. To uninstall
 
+	$ cd ~/ed8
 	$ make clean
 
-6. Linux
