@@ -115,7 +115,7 @@ LINE_NODE *subReadFile(int fd)
 		line_temp = lastLine;
 		lastLine = lastLine->previous;
 	}
-	//free(line_temp);
+	free(line_temp);
 
 	return line_start;
 }
