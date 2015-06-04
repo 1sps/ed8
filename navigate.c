@@ -79,7 +79,7 @@ void navigateH(WINDOW *ed_win)
 
 void navigateJ(WINDOW *ed_win)
 {
-	if(curs_info.cursor_line->next->has_data == TRUE)
+	if(curs_info.cursor_line->next != NULL)
 	{
 		int y, x;
 		getyx(ed_win, y, x);
@@ -98,20 +98,24 @@ void navigateJ(WINDOW *ed_win)
 				xcount++;
 				x=x+1;
 				wmove(ed_win, y, x);
+				wrefresh(ed_win);
 			}
 			else if(currentChar->ci == '\t')
 			{
+				getyx(ed_win, y, x);
 				int x_count_inc = 0;
 				x_count_inc = TAB_LENGTH - (xcount%TAB_LENGTH);
 				xcount=xcount+x_count_inc;
 				x=x+x_count_inc;
 				wmove(ed_win, y, x);
+				wrefresh(ed_win);
 			}
 			else if(currentChar->ci == '\n')
 			{
+				getyx(ed_win, y, x);
 				curs_info.cursor_line = curs_info.cursor_line;
 				curs_info.cursor_char = curs_info.cursor_line->c;
-				wmove(ed_win, 0, 0);
+				wmove(ed_win, y, 0);
 				wrefresh(ed_win);
 				xcount = 0;
 				break;
@@ -142,9 +146,11 @@ void navigateK(WINDOW *ed_win)
 				xcount++;
 				x=x+1;
 				wmove(ed_win, y, x);
+				wrefresh(ed_win);
 			}
 			else if(currentChar->ci == '\t')
 			{
+				getyx(ed_win, y, x);
 				int x_count_inc = 0;
 				x_count_inc = TAB_LENGTH - (xcount%TAB_LENGTH);
 				xcount=xcount+x_count_inc;
@@ -153,9 +159,10 @@ void navigateK(WINDOW *ed_win)
 			}
 			else if(currentChar->ci == '\n')
 			{
+				getyx(ed_win, y, x);
 				curs_info.cursor_line = curs_info.cursor_line;
 				curs_info.cursor_char = curs_info.cursor_line->c;
-				wmove(ed_win, 0, 0);
+				wmove(ed_win, y, 0);
 				wrefresh(ed_win);
 				xcount = 0;
 				break;

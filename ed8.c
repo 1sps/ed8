@@ -97,7 +97,7 @@ int ed8(char *fileName)
 	CHAR_NODE *write_char = NULL;
 	write_line = firstLine;
 	write_char = write_line->c;
-	while(write_line->has_data == TRUE)
+	while(write_line != NULL)
 	{
 		write_char = write_line->c;
 		while(write_char != NULL)

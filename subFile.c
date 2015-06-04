@@ -54,6 +54,7 @@ LINE_NODE *subReadFile(int fd)
 {
 	int ln_num = 0;
 	LINE_NODE *line_start = create_line_node();
+	LINE_NODE *lastLine = line_start;
 	line_start->line_number = 0;
 	LINE_NODE *line_current = NULL;
 	LINE_NODE *line_temp = NULL;
@@ -97,6 +98,7 @@ LINE_NODE *subReadFile(int fd)
 					/* Create next LINE_NODE */
 					ln_num++;
 					line_temp = create_line_node();
+					lastLine = line_temp;
 					line_temp->line_number = ln_num;
 					line_current->next = line_temp;
 					line_temp->previous = line_current;
@@ -106,6 +108,14 @@ LINE_NODE *subReadFile(int fd)
 				}
 			}
 	}
+	line_current = lastLine;
+	if(lastLine->has_data != TRUE)
+	{
+		lastLine->previous->next = NULL;
+		line_temp = lastLine;
+		lastLine = lastLine->previous;
+	}
+	//free(line_temp);
 
 	return line_start;
 }
@@ -115,6 +125,7 @@ LINE_NODE *subReadFile(int fd)
 LINE_NODE *create_line_node(void)
 {
 	LINE_NODE *node_ptr = malloc(sizeof(LINE_NODE));
+	node_ptr->c = NULL;
 	node_ptr->next = NULL;
 	node_ptr->previous = NULL;
 	int line_number = -1;
@@ -166,7 +177,7 @@ int display_init(LINE_NODE *first_line, WINDOW *ed_win)
 
 	getmaxyx(ed_win, ymax, xmax);
 
-	while(current_line->has_data == TRUE)
+	while(current_line != NULL)
 	{
 		current_char = current_line->c;
 		getyx(ed_win, y, x);

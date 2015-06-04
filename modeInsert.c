@@ -14,6 +14,7 @@
 	-> xcount
 */
 #include<ncurses.h>
+#include<stdlib.h>
 #include"header8.h"
 
 MODE modeInsert(WINDOW *ed_win)
@@ -22,7 +23,9 @@ MODE modeInsert(WINDOW *ed_win)
 	int y, x;
 
 	getyx(ed_win, y, x);
-	echo();
+	//echo();
+	//noecho();
+	//raw();
 	while(1)
 	{
 		int ch = wgetch(ed_win);
@@ -31,6 +34,39 @@ MODE modeInsert(WINDOW *ed_win)
 			noecho();
 			changeModeTo = NORMAL;
 			return changeModeTo;
+		}
+		else if(ch == KEY_BACKSPACE)
+		{
+			if(curs_info.cursor_char->previousc != NULL)
+			{
+				if(curs_info.cursor_char->previousc->previousc == NULL)
+				{
+					curs_info.cursor_line->c = curs_info.cursor_char;
+					CHAR_NODE *free_char_node = curs_info.cursor_char->previousc;
+					curs_info.cursor_char->previousc = NULL;
+					free(free_char_node);
+				}
+				else
+				{
+					curs_info.cursor_char->previousc->previousc->nextc = curs_info.cursor_char;
+					CHAR_NODE *free_char_node = curs_info.cursor_char->previousc;
+					curs_info.cursor_char->previousc = curs_info.cursor_char->previousc->previousc;
+					free(free_char_node);
+				}
+				getyx(ed_win, y, x);
+				wmove(ed_win, y, 0);
+				wclrtoeol(ed_win);
+				wrefresh(ed_win);
+				CHAR_NODE *char_current = curs_info.cursor_line->c;
+				while(char_current != NULL)
+				{
+					waddch(ed_win, char_current->ci);
+					char_current = char_current->nextc;
+				}
+				wrefresh(ed_win);
+				wmove(ed_win, y, x-1);
+				wrefresh(ed_win);
+			}
 		}
 		else
 		{
@@ -57,7 +93,7 @@ MODE modeInsert(WINDOW *ed_win)
 				waddch(ed_win, temp->ci);
 				temp = temp->nextc;
 			}
-			wmove(ed_win, y, x);
+			wmove(ed_win, y, x+1);
 			wrefresh(ed_win);
 		}
 	}

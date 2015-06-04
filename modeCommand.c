@@ -14,6 +14,7 @@ MODE modeCommand(WINDOW *ed_win)
 	MODE changeModeTo = PHONY;
 	char choice[25];
 	int y, x, ymax, xmax;
+	getyx(ed_win, y, x);
 	getmaxyx(ed_win, ymax, xmax);
 	wmove(ed_win, ymax-1, 0);
 	waddch(ed_win, ':');
@@ -23,7 +24,7 @@ MODE modeCommand(WINDOW *ed_win)
 	subOffWindow(ed_win);
 	wmove(ed_win, ymax-1, 0);
 	wclrtoeol(ed_win);
-	wmove(ed_win, 0, 0);
+	wmove(ed_win, y, x);
 	wrefresh(ed_win);
 	if(strcmp(choice, "q") == 0)
 	{
