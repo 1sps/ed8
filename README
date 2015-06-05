@@ -1,4 +1,4 @@
-# 06/03/2015
+# 06/03/2015 
 # Written by: SPS
 
 # This repository has the source code of a program to display and edit ascii text file.
@@ -26,3 +26,5 @@ To uninstall the program
 ------------------------------
 	$ cd ~/ed8
 	$ make clean
+
+# END
