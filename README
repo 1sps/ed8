@@ -1,30 +1,26 @@
-# 06/03/2015 
-# Written by: SPS
+# Date: 06/03/2015 
 
-# This repository has the source code of a program to display and edit ascii text file.
-# This C program is written for a GNU/Linux system.
-# Dependency : "ncurses" C library
+# Program to display small ascii text files.
+# Dependency : "ncurses" 
 
 # This project is not completed yet. 
 
-To download the source code 
----------------------------
+To download the code
+
 	$ cd ~
 	$ git clone https://github.com/1sps/ed8.git
 
-To compile the source code:
----------------------------
+To compile:
+
 	$ cd ~/ed8
 	$ make
 
-To run the program
-------------------------
+To run 
+
 	$ cd ~/ed8
 	$ ./ed8
 
-To uninstall the program 
-------------------------------
+To uninstall 
+
 	$ cd ~/ed8
 	$ make clean
-
-# END OF THIS README
